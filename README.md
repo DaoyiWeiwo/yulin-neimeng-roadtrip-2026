@@ -4,6 +4,8 @@
 
 `2026榆林内蒙古往返六日自驾攻略.html`
 
+公开地址：<http://daoyi.me/yulin-neimeng-roadtrip-2026/>
+
 ## 更新网页
 
 修改源文件后提交并推送到 `main`：
