@@ -1,0 +1,65 @@
+/* Hallmark · tokens: Almanac · anchor hue: lake-teal · paper band: light */
+:root {
+  --color-paper: oklch(97.5% 0.009 205);
+  --color-paper-2: oklch(94.5% 0.014 205);
+  --color-paper-3: oklch(91% 0.022 205);
+  --color-ink: oklch(20% 0.026 235);
+  --color-ink-soft: oklch(31% 0.024 230);
+  --color-muted: oklch(43% 0.022 225);
+  --color-rule: oklch(80% 0.022 210);
+  --color-rule-strong: oklch(63% 0.035 210);
+  --color-accent: oklch(43% 0.13 196);
+  --color-accent-strong: oklch(34% 0.12 198);
+  --color-accent-soft: oklch(91% 0.045 195);
+  --color-accent-ink: oklch(98% 0.008 205);
+  --color-warning: oklch(60% 0.15 68);
+  --color-warning-soft: oklch(94% 0.05 82);
+  --color-error: oklch(48% 0.18 28);
+  --color-error-soft: oklch(94% 0.035 28);
+  --color-success: oklch(39% 0.11 155);
+  --color-focus: oklch(42% 0.16 48);
+  --color-overlay: oklch(15% 0.025 235 / 0.76);
+  --color-shadow: oklch(20% 0.026 235 / 0.08);
+  --color-transparent: transparent;
+
+  --font-display: "Noto Serif SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  --font-body: "IBM Plex Sans", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.563rem;
+  --text-2xl: 1.953rem;
+  --text-3xl: 2.441rem;
+  --text-display: 3.052rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --rule-hairline: 1px;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}

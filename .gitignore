@@ -1,0 +1,19 @@
+# The source directory contains several unrelated local prototypes.
+# Keep this publication repository limited to the guide and its dependencies.
+*
+!.gitignore
+!README.md
+!2026榆林内蒙古往返六日自驾攻略.html
+!内蒙古文旅一卡通权益.html
+!styles.css
+!tokens.css
+!transcripts.js
+!app.js
+!.github/
+!.github/workflows/
+!.github/workflows/**
+!assets/
+!assets/benefits-20260914/
+!assets/benefits-20260914/**
+!assets/benefits-20260916/
+!assets/benefits-20260916/**

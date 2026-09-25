@@ -1,0 +1,60 @@
+name: Publish Yulin road trip guide
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Assemble static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/assets
+
+          # Keep the Chinese filename as the editable source and publish it as the root page.
+          cp '2026榆林内蒙古往返六日自驾攻略.html' _site/index.html
+          cp '2026榆林内蒙古往返六日自驾攻略.html' '_site/2026榆林内蒙古往返六日自驾攻略.html'
+          cp '2026榆林内蒙古往返六日自驾攻略.html' '_site/2026榆林往返六日自驾攻略.html'
+
+          cp '内蒙古文旅一卡通权益.html' styles.css tokens.css transcripts.js app.js _site/
+          cp -R assets/benefits-20260914 assets/benefits-20260916 _site/assets/
+          touch _site/.nojekyll
+
+          # This makes the deployed revision inspectable without exposing repository metadata.
+          printf '{"revision":"%s","updatedAt":"%s"}\n' "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > _site/version.json
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
