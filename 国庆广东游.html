@@ -146,6 +146,11 @@
     .shore-card .shore-note { margin-top: 14px; padding: 9px 11px; border-left: 3px solid var(--gold); background: #f8f2df; color: #455a4d; font-size: 12px; }
     [data-theme="night"] .shore-card .shore-note { background: #283e35; color: #d7e5d8; }
 
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .gallery-card { overflow: hidden; border: 1px solid var(--line); background: var(--white); }
+    .gallery-card img { width: 100%; height: 170px; display: block; object-fit: cover; }
+    .gallery-card figcaption { padding: 10px 12px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
     .place-grid, .food-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .place-card, .food-card { overflow: hidden; border: 1px solid var(--line); background: var(--white); }
     .place-card img { width: 100%; height: 158px; display: block; object-fit: cover; }
@@ -156,19 +161,6 @@
     .place-copy li + li, .food-card li + li { margin-top: 4px; }
     .food-card a { color: var(--ink-2); }
 
-    .budget-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 22px; }
-    .budget-form, .budget-result { padding: 23px; border: 1px solid var(--line); background: var(--white); }
-    .budget-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .budget-form label { display: grid; gap: 5px; color: var(--muted); font-size: 11px; }
-    .budget-form input { width: 100%; min-height: 40px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 3px; background: transparent; }
-    .budget-form .wide { grid-column: 1 / -1; }
-    .budget-note { margin: 0; color: var(--muted); font-size: 11px; }
-    .budget-result { display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; gap: 12px; }
-    .budget-result > div { padding: 12px; border-left: 2px solid var(--gold); }
-    .budget-result small { display: block; color: var(--muted); font-size: 11px; }
-    .budget-result output { display: block; margin-top: 4px; color: var(--ink); font: 700 27px/1.2 var(--serif); }
-    .budget-result .budget-total { grid-column: 1 / -1; border-top: 1px solid var(--line); border-left: 0; padding-top: 18px; }
-    .budget-result .budget-total output { color: var(--rust); font-size: 38px; }
 
     .check-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
     .check-card { padding: 20px; border-top: 3px solid var(--ink); background: var(--white); }
@@ -188,7 +180,7 @@
       .hero-inner { grid-template-columns: 1fr; min-height: 650px; padding-top: 65px; }
       .hero h1 { font-size: 52px; }
       .hero-aside { justify-content: start; }
-      .route-grid, .place-grid, .food-grid, .shore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .route-grid, .place-grid, .food-grid, .shore-grid, .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .day-body { grid-template-columns: 1fr; }
       .day-aside { border-top: 2px solid var(--gold); border-left: 0; }
       .check-grid { grid-template-columns: 1fr; }
@@ -212,21 +204,17 @@
       .section-title { display: block; }
       .section-title h2 { font-size: 28px; }
       .section-title p { margin-top: 10px; }
-      .route-grid, .place-grid, .food-grid, .shore-grid, .choice-panel, .budget-layout { grid-template-columns: 1fr; }
+      .route-grid, .place-grid, .food-grid, .shore-grid, .gallery-grid, .choice-panel { grid-template-columns: 1fr; }
       .route-card { min-height: 0; }
       .day-head { grid-template-columns: 54px 1fr; gap: 12px; padding: 16px; }
       .day-number { font-size: 31px; }
       .day-head h3 { font-size: 19px; }
       .day-tag { grid-column: 2; justify-self: start; }
       .day-body { padding: 16px; }
-      .budget-form { grid-template-columns: 1fr; }
-      .budget-form .wide { grid-column: auto; }
-      .budget-result { grid-template-columns: 1fr 1fr; padding: 16px; }
-      .budget-result .budget-total { grid-column: 1 / -1; }
       .source-list { grid-template-columns: 1fr; }
     }
     @media print {
-      .site-head, .hero-actions, .head-actions, .choice-bar, .budget-form, footer { display: none !important; }
+      .site-head, .hero-actions, .head-actions, .choice-bar, footer { display: none !important; }
       .hero { min-height: 260px; }
       .hero-inner { min-height: 260px; padding: 30px 0; }
       .section-block { padding-top: 28px; }
@@ -239,7 +227,7 @@
   <header class="wrap site-head">
     <a class="brand" href="#overview"><span class="brand-mark">岭</span><span>岭南七日 / 2026</span></a>
     <nav aria-label="页面导航">
-      <a href="#days">逐日</a><a href="#choices">交通</a><a href="#places">路线</a><a href="#food">吃什么</a><a href="#budget">预算</a><a href="#checklist">清单</a>
+      <a href="#days">逐日</a><a href="#choices">交通</a><a href="#places">路线</a><a href="#food">吃什么</a><a href="#weather">天气</a><a href="#gallery">图片</a><a href="#checklist">清单</a>
     </nav>
     <div class="head-actions"><button id="mode" type="button" aria-label="切换夜间模式">夜间</button><button type="button" onclick="window.print()">打印</button></div>
   </header>
@@ -293,13 +281,41 @@
         </div>
       </div>
     </section>
-        <section class="section-block" id="days">
+
+    <section class="section-block" id="gallery">
+      <div class="wrap">
+        <div class="section-title"><div><p class="eyebrow">01C / VISUAL CHECKLIST</p><h2>沿途先看这些画面，再决定现场停留。</h2></div><p>图片为路线氛围和取景提示；国庆人流、天气与现场开放状态优先于照片效果。</p></div>
+        <div class="gallery-grid">
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=78" alt="深圳华强北城市建筑与街区" loading="lazy"><figcaption>华强北：电子街、城市建筑和夜间商圈。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?auto=format&fit=crop&w=900&q=78" alt="汕头骑楼街区与城市街景" loading="lazy"><figcaption>汕头小公园：骑楼、开埠老城和步行扫街。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=78" alt="珠海海岸线与海面" loading="lazy"><figcaption>珠海情侣路：城市阳台、海岸线和日月贝。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=78" alt="夜色与山海景观" loading="lazy"><figcaption>深圳天文台备选：晴天看海岸线，雨天不进山。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=78" alt="岭南城市街区" loading="lazy"><figcaption>中山：孙文西路骑楼和岐江河夜景。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=900&q=78" alt="岭南园林与绿色景观" loading="lazy"><figcaption>顺德：清晖园、华盖路和大良老城。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=900&q=78" alt="城市旅行与道路景观" loading="lazy"><figcaption>珠海到中山：自驾路上按导航选择停车和休息点。</figcaption></figure>
+          <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=78" alt="自然景观与天气变化" loading="lazy"><figcaption>佛山收尾：祖庙、岭南天地或南风古灶三选一。</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="weather">
+      <div class="wrap">
+        <div class="section-title"><div><p class="eyebrow">01D / WEATHER PLAN</p><h2>10 月 3—9 日按“雷雨前段、较干中段”准备。</h2></div><p>截至 10 月 3 日检索，广东前段仍有雷雨和短时强对流，珠海气象局提示 5—7 日较晴朗干燥但海面风力增大；出发前每天重新看官方预警。</p></div>
+        <div class="shore-grid">
+          <article class="shore-card recommended"><p class="shore-kicker">10/3—4 · 惠阳/深圳</p><h3>雨具随身，华强北照常，天文台不硬闯</h3><p>深圳 10/4 预报有雷阵雨转多云，白天城市室内活动更稳。华强北博物馆、商场和电子市场可作为雨天主线；斯诺克晚场前留出雨天拥堵时间。</p><ul><li>若 10/4 仍有雷雨，取消深圳天文台和大鹏远行，不影响华强北＋观赛。</li><li>雷雨时不要在露天高处、海边栈道或山路停留。</li></ul></article>
+          <article class="shore-card"><p class="shore-kicker">10/5 · 汕头</p><h3>小公园老城适合雨天弹性游</h3><p>汕头近期预报仍可能有小雨/雷阵雨；小公园骑楼、开埠文化馆、老妈宫和牛肉火锅可以穿插，减少连续露天步行。</p><ul><li>把海滨步道放到雨停后的备选，优先老城室内/半室内路线。</li><li>深圳北返程车票固定后，再决定下午是否加博物馆或咖啡。</li></ul></article>
+          <article class="shore-card"><p class="shore-kicker">10/6—9 · 珠海—佛山</p><h3>防晒和薄外套都带，海上风和降温要留意</h3><p>珠海气象局提示 5—7 日较晴朗干燥、早晚清凉，海面风力可能加大；中山、顺德、佛山适合城市步行，但午后仍需防晒。</p><ul><li>船班出发前查海况；风大时减少海边停留，优先日月贝外观和城市街区。</li><li>自驾备薄外套、折叠伞和防晒用品；雨天把清晖园、祖庙等室内/半室内点放前。</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="days">
       <div class="wrap">
         <div class="section-title"><div><p class="eyebrow">02 / SEVEN DAYS</p><h2>深圳两天固定活动，西行四天连续自驾。</h2></div><p>日期为 2026 年 10 月 3 日至 9 日；酒店由你自选，以下只保留交通、游玩和吃饭安排。</p></div>
         <div class="day-list">
           <article class="day" id="day-1"><header class="day-head"><span class="day-number">01</span><div><p>10 月 3 日 · 周六</p><h3>抵达惠阳，轻松吃饭并准备进深圳</h3></div><span class="day-tag">住宿自选</span></header><div class="day-body"><div><h4>抵达后不排远郊景点</h4><p>抵达惠阳站或惠州后，先完成行李整理、10/4 惠阳站车票和斯诺克票面确认。晚餐选择惠阳/淡水片区的客家菜、烧鹅、盐焗鸡或本地海鲜，早点休息，为次日华强北和晚场留体力。</p><ul><li>确认惠阳站进站口、发车时间和深圳落脚点；国庆提前 30—45 分钟进站。</li><li>把斯诺克门票、身份证、充电宝和轻便随身包单独放好，场馆安检规则以主办方通知为准。</li><li>不安排远郊绕行，把时间留给 4 日早班车。</li></ul></div><aside class="day-aside"><strong>当晚吃什么</strong><p>惠阳/淡水可优先找本地客家菜、猪脚饭、烧鹅饭和牛杂；若已在惠州城区，吃完直接回到第二天上车方便的区域。</p></aside></div></article>
 
-          <article class="day" id="day-2"><header class="day-head"><span class="day-number">02</span><div><p>10 月 4 日 · 周日</p><h3>惠阳站到深圳，华强北白天游，晚上看斯诺克</h3></div><span class="day-tag">住宿自选</span></header><div class="day-body"><div><h4>上午进深 · 下午华强北 · 晚间宝安体育中心</h4><p>从惠阳站乘动车到深圳北或福田，再到华强北片区午餐和 citywalk。推荐顺序：华强北博物馆→赛格通信市场（按需购买）→华强北步行街→商场内休息。下午提前离开福田，前往宝安体育中心体育馆看深圳公开赛。</p><ul><li>华强北电子市场按“先看样、问保修、留发票”购买，不在街边接受无法核验的刷机、改机承诺。</li><li>午餐可选潮汕牛肉、烧腊、肠粉或商圈简餐；晚场前不要安排跨区网红店排队。</li><li>斯诺克赛事至 10/4 收官，比赛场次、检票口、入场时间和散场交通以票面及主办方通知为准。</li></ul></div><aside class="day-aside"><strong>交通节奏</strong><p>华强北到宝安体育中心至少留 60—90 分钟，建议打车或用地图实时规划地铁；散场后直接回住宿点，不再转去蛇口。</p></aside></div></article>
+          <article class="day" id="day-2"><header class="day-head"><span class="day-number">02</span><div><p>10 月 4 日 · 周日</p><h3>惠阳站到深圳，华强北白天游，晚上看斯诺克</h3></div><span class="day-tag">住宿自选</span></header><div class="day-body"><div><h4>上午进深 · 下午华强北 · 晚间宝安体育中心</h4><p>从惠阳站乘动车到深圳北或福田，再到华强北片区午餐和 citywalk。推荐顺序：华强北博物馆→赛格通信市场（按需购买）→华强北步行街→商场内休息。下午提前离开福田，前往宝安体育中心体育馆看深圳公开赛。</p><ul><li>华强北电子市场按“先看样、问保修、留发票”购买，不在街边接受无法核验的刷机、改机承诺。</li><li>午餐可选潮汕牛肉、烧腊、肠粉或商圈简餐；晚场前不要安排跨区网红店排队。</li><li>斯诺克赛事至 10/4 收官，比赛场次、检票口、入场时间和散场交通以票面及主办方通知为准。</li><li>深圳天文台不建议塞进这一天：官方实行免费预约分时参观，10/4 还处于国庆和大鹏车辆预约管控期；只有已经拿到预约且愿意取消华强北时才考虑替换。</li></ul></div><aside class="day-aside"><strong>交通节奏</strong><p>华强北到宝安体育中心至少留 60—90 分钟，建议打车或用地图实时规划地铁；散场后直接回住宿点，不再转去蛇口。</p></aside></div></article>
 
           <article class="day" id="day-3"><header class="day-head"><span class="day-number">03</span><div><p>10 月 5 日 · 周一</p><h3>深圳往返汕头一日游，晚上回深圳</h3></div><span class="day-tag">住宿自选</span></header><div class="day-body"><div><h4>早班高铁去汕头 · 小公园老城 · 晚班返回</h4><p>建议选择深圳北早班车到汕头站，公开查询中车程约 1 小时 40 分至 2 小时 30 分，具体以 12306 为准。汕头站出站后先到小公园片区，走骑楼街、开埠文化馆、老妈宫和中山纪念亭，午餐安排牛肉火锅或潮汕粿品，下午补充咖啡、海滨步道或博物馆，再回汕头站。</p><ul><li>一日游不去南澳岛和潮州古城，避免把往返高铁变成夜间赶路。</li><li>小公园扫街可尝粿汁、蚝烙、鸭母捻、甘草水果、牛肉丸；正餐再选一顿现切牛肉火锅。</li><li>返程车次至少留出从老城到汕头站的打车缓冲，国庆晚间优先提前到站。</li></ul></div><aside class="day-aside"><strong>汕头站接驳</strong><p>汕头站到小公园可打车，也可查询小公园旅游专线；当天以公交实时班次和道路拥堵为准。</p></aside></div></article>
 
@@ -358,16 +374,6 @@
       </div>
     </section>
 
-    <section class="section-block" id="budget">
-      <div class="wrap">
-        <div class="section-title"><div><p class="eyebrow">07 / BUDGET</p><h2>把高铁、汕头往返、轮渡和自驾分别计价。</h2></div><p>住宿由你自选，输入住宿均价即可估算；机票、赛事票和景点项目按实际订单填写。</p></div>
-        <div class="budget-layout">
-          <form class="budget-form" id="budget-form"><label>同行人数<input id="people" type="number" min="1" max="8" step="1" value="3"></label><label>珠海起租天数（含中山/顺德/佛山）<input id="car-days" type="number" min="0" max="10" step="1" value="3"></label><label>租车/天（元）<input id="car-rate" type="number" min="0" step="50" value="0"></label><label>佛山异地还车费（元）<input id="oneway-rate" type="number" min="0" step="50" value="0"></label><label>惠阳/深圳/汕头市内交通（元）<input id="transfer-rate" type="number" min="0" step="50" value="0"></label><label>惠阳→深圳高铁/人（元）<input id="rail-rate" type="number" min="0" step="10" value="0"></label><label>深圳↔汕头高铁/人（元）<input id="shantou-rail-rate" type="number" min="0" step="10" value="0"></label><label>蛇口→珠海船票/人（元）<input id="boat-rate" type="number" min="0" step="20" value="0"></label><label>住宿/晚（元）<input id="hotel-rate" type="number" min="0" step="50" value="0"></label><label>人均餐费/天（元）<input id="food-rate" type="number" min="0" step="20" value="180"></label><label>人均门票/观赛（元）<input id="ticket-rate" type="number" min="0" step="50" value="0"></label><label>租车油费＋路桥＋停车（元）<input id="road-rate" type="number" min="0" step="50" value="0"></label><p class="budget-note wide">住宿由你自选并按 6 晚填写均价；租车以实际取还车小时数和异地费为准；所有未报价项请在下单后填入。</p></form>
-          <div class="budget-result" aria-live="polite"><div><small>珠海起租车辆</small><output id="out-car">¥0</output></div><div><small>接送＋高铁＋船票</small><output id="out-transfer">¥0</output></div><div><small>住宿</small><output id="out-hotel">¥0</output></div><div><small>餐饮</small><output id="out-food">¥0</output></div><div><small>门票</small><output id="out-ticket">¥0</output></div><div class="budget-total"><small>已填项目合计 / 不含机票</small><output id="out-total">¥0</output><small id="out-per">人均 ¥0</small></div></div>
-        </div>
-      </div>
-    </section>
-
         <section class="section-block" id="checklist">
       <div class="wrap">
         <div class="section-title"><div><p class="eyebrow">08 / BEFORE YOU GO</p><h2>优先锁车票、船票、赛事票和异地还车。</h2></div><p>以下节点按 2026-10-02 检索；国庆期间车次、船班、赛事入场和景点营业以当天官方信息为准。</p></div>
@@ -383,12 +389,21 @@
     <section class="section-block" id="sources">
       <div class="wrap">
         <div class="section-title"><div><p class="eyebrow">09 / SOURCES</p><h2>交通、景区、赛事与餐饮的核查入口。</h2></div><p>页面更新于 2026-10-02。攻略文章和用户体验只作路线参考；车次、船班、租车、赛事入场和营业状态以官方及订单为准。</p></div>
-                <ol class="source-list">
+        <ol class="source-list">
+          <li><a href="https://weather.sz.gov.cn/qixiangfuwu/tianwenfuwu/yuyuexuzhi/content/post_3584720.html" target="_blank" rel="noreferrer">深圳市气象局：深圳市天文台公众开放参观须知（免费预约、分时入场、车辆与步行规则）</a></li>
+          <li><a href="https://www.sz.gov.cn/hdjl/ywzsk/gajjj/lstxxkyw/content/post_13001520.html" target="_blank" rel="noreferrer">深圳政府在线：2026 年 5 月 1 日至 10 月 7 日大鹏半岛预约通行</a></li>
+          <li><a href="https://weather.sz.gov.cn/qixiangfuwu/yubaofuwu/index.html" target="_blank" rel="noreferrer">深圳市气象局：天气预警、台风路径和城市预报</a></li>
+          <li><a href="https://www.nmc.cn/publish/forecast/AGD/shenzuo.html" target="_blank" rel="noreferrer">中央气象台：深圳城市 7 天预报</a></li>
+          <li><a href="https://www.nmc.cn/publish/forecast/AGD/shantou.html" target="_blank" rel="noreferrer">中央气象台：汕头城市预报</a></li>
+          <li><a href="https://weather.zhuhai.gov.cn/" target="_blank" rel="noreferrer">珠海市气象局：珠海 7 天天气预报和海面风况</a></li>
+          <li><a href="http://weather.cma.cn/web/weather/59493.html" target="_blank" rel="noreferrer">中国气象局城市预报：广东沿线天气更新</a></li>
+          <li><a href="https://www.szhuodong.com/2026/09/109756.html" target="_blank" rel="noreferrer">深圳活动：天文台预约名额与开放日信息参考</a></li>
           <li><a href="https://www.12306.cn/" target="_blank" rel="noreferrer">中国铁路 12306：惠阳站→深圳、深圳北↔汕头实际车次和余票</a></li>
           <li><a href="https://www.wst.tv/" target="_blank" rel="noreferrer">World Snooker Tour：深圳公开赛赛程与 Match Centre</a></li>
           <li><a href="https://www.sz.gov.cn/szzt2010/szwtt/wtcg/tycg/content/mpost_11117344.html" target="_blank" rel="noreferrer">深圳市政府：宝安体育中心场馆地址</a></li>
           <li><a href="https://www.klook.com/zh-HK/blog/shenzhen-huaqiangbei/" target="_blank" rel="noreferrer">Klook：2026 华强北电子市场、商场与避坑参考</a></li>
           <li><a href="https://utravel.com.hk/news/detail/20067166/%E6%B7%B1%E5%9C%B3%E8%8F%AF%E5%BC%B7%E5%8C%97%E5%95%86%E5%A0%B4%E6%94%BB%E7%95%A5-%E4%BA%A4%E9%80%9A%E6%96%B9%E5%BC%8F-%E5%BF%85%E8%B2%B7-%E7%BE%8E%E9%A3%9F%E6%8E%A8%E4%BB%8B" target="_blank" rel="noreferrer">U Travel：华强北商场与美食路线参考</a></li>
+          <li><a href="https://www.xiaohongshu.com/explore" target="_blank" rel="noreferrer">小红书：华强北、汕头小公园、珠海情侣路和顺德美食现场笔记检索入口</a></li>
           <li><a href="https://www.cmskchp.com/transport" target="_blank" rel="noreferrer">招商蛇口：蛇口往返珠海船票、航线与乘船规则</a></li>
           <li><a href="https://www.klook.com/zh-CN/activity/129435-z/" target="_blank" rel="noreferrer">Klook：珠海情侣路、珠海渔女、日月贝路线参考</a></li>
           <li><a href="https://hk.trip.com/moments/destination-zhongshan-233/" target="_blank" rel="noreferrer">Trip Moments：中山孙文西路、岐江公园与城市夜景参考</a></li>
@@ -427,27 +442,6 @@
         buttons.forEach(item => { const active = item === button; item.classList.toggle('is-active', active); item.setAttribute('aria-selected', active); });
         panels.forEach(panel => panel.classList.toggle('is-active', panel.dataset.panel === key));
       }));
-
-      const get = id => Number(document.querySelector(id).value) || 0;
-      const money = value => `¥${Math.round(value).toLocaleString('zh-CN')}`;
-      const updateBudget = () => {
-        const people = get('#people');
-        const car = get('#car-days') * get('#car-rate') + get('#oneway-rate');
-        const transfer = get('#transfer-rate') + people * (get('#rail-rate') + get('#shantou-rail-rate') * 2 + get('#boat-rate'));
-        const hotel = 6 * get('#hotel-rate');
-        const food = 7 * people * get('#food-rate');
-        const ticket = people * get('#ticket-rate');
-        const total = car + transfer + hotel + food + ticket + get('#road-rate');
-        document.querySelector('#out-car').textContent = money(car);
-        document.querySelector('#out-transfer').textContent = money(transfer);
-        document.querySelector('#out-hotel').textContent = money(hotel);
-        document.querySelector('#out-food').textContent = money(food);
-        document.querySelector('#out-ticket').textContent = money(ticket);
-        document.querySelector('#out-total').textContent = money(total);
-        document.querySelector('#out-per').textContent = `人均 ${money(people ? total / people : total)}`;
-      };
-      document.querySelectorAll('#budget-form input').forEach(input => input.addEventListener('input', updateBudget));
-      updateBudget();
     })();
   </script>
 </body>
