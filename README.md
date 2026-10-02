@@ -1,8 +1,8 @@
-# 榆林往返 · 内蒙古六日/七日自驾攻略
+# 惠州 · 深圳 · 珠海 · 顺德 · 佛山六晚七日攻略
 
 这是可直接发布的静态网页源文件。网站入口由 Cloudflare Pages 自动生成，源文件是：
 
-`2026榆林内蒙古往返六日自驾攻略.html`
+`国庆广东游.html`
 
 公开地址：<https://guide.zhldai.com/>
 
@@ -11,7 +11,7 @@
 修改源文件后提交并推送到 `main`：
 
 ```bash
-git add '2026榆林内蒙古往返六日自驾攻略.html'
+git add '国庆广东游.html' .github/workflows/cloudflare-pages.yml README.md
 git commit -m "更新自驾攻略"
 git push
 ```

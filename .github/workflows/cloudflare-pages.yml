@@ -26,9 +26,8 @@ jobs:
           rm -rf _site
           mkdir -p _site/assets
 
-          cp '2026榆林内蒙古往返六日自驾攻略.html' _site/index.html
-          cp '2026榆林内蒙古往返六日自驾攻略.html' '_site/2026榆林内蒙古往返六日自驾攻略.html'
-          cp '2026榆林内蒙古往返六日自驾攻略.html' '_site/2026榆林往返六日自驾攻略.html'
+          cp '国庆广东游.html' _site/index.html
+          cp '国庆广东游.html' '_site/国庆广东游.html'
           cp '内蒙古文旅一卡通权益.html' styles.css tokens.css transcripts.js app.js _site/
           cp -R assets/benefits-20260914 assets/benefits-20260916 _site/assets/
           touch _site/.nojekyll
